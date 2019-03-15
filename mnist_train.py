@@ -43,8 +43,9 @@ def train(mnist):
         mnist.train.num_examples /
         BATCH_SIZE,
         LEARNING_RATE_DECAY)
-    train_step = tf.train.GradientDescentOptimizer(
+    #train_step = tf.train.GradientDescentOptimizer(
         learning_rate).minimize(loss)
+    train_step = tf.train.RMSPropOptimizer(learning_rate).minimize(loss)
     train_op = tf.group(train_step, var_avg_op)
 
     correct_prediction = tf.equal(tf.argmax(t, 1), tf.argmax(y, 1))
